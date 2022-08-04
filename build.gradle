@@ -16,7 +16,11 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = '2021.3.3'
+    version = '2021.2.1'
+    plugins = ['android']
+}
+runIde {
+    ideDir.set(file("/Applications/Android Studio.app/Contents"))
 }
 patchPluginXml {
     changeNotes = """
