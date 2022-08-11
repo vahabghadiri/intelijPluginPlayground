@@ -5,22 +5,26 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.MessageType
+import com.intellij.openapi.ui.Messages
 import java.util.*
 
 class Playground : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        e.project?.run {
-            showNotificationBaloon(this)
-        }
-        val editor = e.getData(CommonDataKeys.EDITOR)
-        println(editor?.document?.charsSequence)
+        showInputDialog(e)
     }
 
-    private fun showNotificationBaloon(project: Project) {
+    private fun showInputDialog(e: AnActionEvent) {
+        val editor = e.getData(CommonDataKeys.EDITOR)
+        val text = editor?.selectionModel?.selectedText ?: "-"
+        val result = Messages.showInputDialog(text, "Title", null)
+        showNotification(e.project!!, result ?: "--")
+    }
+
+    private fun showNotification(project: Project, value: String) {
         NotificationGroup(
             "fsdfdsfsdf", NotificationDisplayType.TOOL_WINDOW
         ).createNotification(
-            "Playground plugin says Hello! :D ${
+            "$value ${
                 Calendar.getInstance().time
             }\n${
                 project.name
