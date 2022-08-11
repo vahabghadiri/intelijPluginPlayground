@@ -8,6 +8,7 @@ import com.intellij.openapi.ui.MessageType
 import com.intellij.openapi.ui.Messages
 import java.util.*
 
+// shift + control + I
 class Playground : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         showInputDialog(e)
@@ -17,7 +18,7 @@ class Playground : AnAction() {
         val editor = e.getData(CommonDataKeys.EDITOR)
         val text = editor?.selectionModel?.selectedText ?: "-"
         val result = Messages.showInputDialog(text, "Title", null)
-        showNotification(e.project!!, result ?: "--")
+        Messages.showMessageDialog(e.project!!, result, "Title", Messages.getInformationIcon())
     }
 
     private fun showNotification(project: Project, value: String) {
