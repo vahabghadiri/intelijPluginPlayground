@@ -11,6 +11,10 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
+
+        <toolWindow id="Sample tool" secondary="true" icon="AllIcons.General.Note" anchor="right"
+                    factoryClass="SimpleToolWidowFactory"/>
+
     </extensions>
 
     <actions>
